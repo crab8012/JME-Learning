@@ -45,6 +45,11 @@
             <artifactId>jme3-testdata</artifactId>
             <version>3.6.1-stable</version>
         </dependency>
+        <dependency>
+            <groupId>org.jmonkeyengine</groupId>
+            <artifactId>jme3-jogg</artifactId>
+            <version>3.6.1-stable</version>
+        </dependency>
     </dependencies>
 
 </project>
