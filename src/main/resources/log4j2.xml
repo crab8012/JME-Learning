@@ -1,0 +1,15 @@
+<Configuration status="info">
+    <Appenders>
+        <Console name="Out">
+
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="us.bluesakuradev.testgame01" level="debug" additivity="false">
+            <AppenderRef ref="Out"/>
+        </Logger>
+        <Root level="info">
+            <AppenderRef ref="Out"/>
+        </Root>
+    </Loggers>
+</Configuration>
