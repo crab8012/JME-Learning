@@ -16,11 +16,13 @@ import com.jme3.input.controls.KeyTrigger;
 import com.jme3.math.ColorRGBA;
 import com.jme3.renderer.ViewPort;
 import com.jme3.scene.Node;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import us.bluesakuradev.testgame01.AudioManager;
 import us.bluesakuradev.testgame01.Main;
 
 public class AudioTestAppState extends BaseAppState {
-
+    static final Logger logger = LogManager.getLogger(AudioTestAppState.class.getName());
     final private ActionListener customActionListener = new ActionListener() {
         @Override
         public void onAction(String name, boolean pressed, float tpf) {
@@ -61,7 +63,7 @@ public class AudioTestAppState extends BaseAppState {
         envNames = new String[]{"Cavern", "Closet", "Garage", "AcousticLab", "Dungeon"};
         sfxs = new String[]{"ping1", "error", "notif", "thud"};
 
-        System.out.println("ATS.initialize");
+        logger.info("ATS.initialize");
         // Initialize the appState
         // Set up the SimpleApplication managers
         this.app = (Main) application;
@@ -88,7 +90,7 @@ public class AudioTestAppState extends BaseAppState {
 
     @Override
     protected void cleanup(Application application) {
-        System.out.println("ATS.cleanup");
+        logger.info("ATS.cleanup");
         // Clean up what you initialized in initialize()
         detachUserInput();
         this.app.getGuiNode().detachChild(audioInfo);
@@ -97,13 +99,13 @@ public class AudioTestAppState extends BaseAppState {
 
     @Override
     protected void onEnable() {
-        System.out.println("ATS.onEnable");
+        logger.info("ATS.onEnable");
         // Manage things that only exist when enabled... Scene Graph Attachment or Input Listeners
     }
 
     @Override
     protected void onDisable() {
-        System.out.println("ATS.onDisable");
+        logger.info("ATS.onDisable");
         // Disable things set in onEnable()
     }
 
@@ -154,7 +156,7 @@ public class AudioTestAppState extends BaseAppState {
         }
         if(name.equals("toggle_reverb") && pressed){
             reverb = !reverb;
-            System.out.println("Reverb: " + reverb);
+            logger.info("Reverb: " + reverb);
         }
     }
     private void triggerSoundActions(String name, boolean pressed, float tpf){

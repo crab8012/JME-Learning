@@ -18,9 +18,12 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.shape.Box;
 import com.jme3.scene.shape.Sphere;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import us.bluesakuradev.testgame01.Main;
 
 public class ShootableTestState extends BaseAppState {
+    static final Logger logger = LogManager.getLogger(ShootableTestState.class.getName());
     Main app;
     AssetManager assetManager;
     InputManager inputManager;
@@ -41,7 +44,7 @@ public class ShootableTestState extends BaseAppState {
                 shootables.collideWith(ray, results);
                 if(results.size() > 0){
                     for(CollisionResult c : results){
-                        System.out.println("Collision with " + c.getGeometry().getName());
+                        logger.info("Collision with " + c.getGeometry().getName());
                     }
 
                     CollisionResult closest = results.getClosestCollision();
@@ -56,7 +59,7 @@ public class ShootableTestState extends BaseAppState {
 
     @Override
     protected void initialize(Application application) {
-        System.out.println("Init Shootable");
+        logger.info("Init Shootable");
         this.app = (Main) application;
         this.assetManager = app.getAssetManager();
         this.guiFont = this.assetManager.loadFont("Interface/Fonts/Default.fnt");
@@ -83,7 +86,7 @@ public class ShootableTestState extends BaseAppState {
 
     @Override
     protected void cleanup(Application application) {
-        System.out.println("Clean Shootable");
+        logger.info("Clean Shootable");
         this.app.getRootNode().detachChild(sceneNode);
         this.app.getGuiNode().detachChild(guiNode);
     }

@@ -21,16 +21,21 @@ import com.jme3.scene.shape.Sphere;
 import com.jme3.system.AppSettings;
 import com.jme3.util.BufferUtils;
 import com.jme3.util.SkyFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import us.bluesakuradev.testgame01.teststates.AudioTestAppState;
 import us.bluesakuradev.testgame01.teststates.FloatingCubeTestState;
+import us.bluesakuradev.testgame01.teststates.MainMenuState;
 import us.bluesakuradev.testgame01.teststates.ShootableTestState;
 
 import java.awt.*;
 
 public class Main extends SimpleApplication {
+    static final Logger logger = LogManager.getLogger(Main.class.getName());
     AudioTestAppState ats = new AudioTestAppState();
     FloatingCubeTestState fcts = new FloatingCubeTestState();
     ShootableTestState sts = new ShootableTestState();
+    MainMenuState menu = new MainMenuState();
     boolean audioState = false;
     boolean floatingCubeState = false;
     boolean shootableState = false;
@@ -39,7 +44,7 @@ public class Main extends SimpleApplication {
         @Override
         public void onAction(String name, boolean pressed, float tpf) {
             if(name.equals("audio_state") && pressed){
-                System.out.println("Audio State");
+                logger.info("Audio State");
                 if(audioState){
                     stateManager.detach(ats);
                 }else{
@@ -48,7 +53,7 @@ public class Main extends SimpleApplication {
                 audioState = !audioState;
             }
             if(name.equals("cube_state") && pressed){
-                System.out.println("Cube State");
+                logger.info("Cube State");
                 if(floatingCubeState){
                     stateManager.detach(fcts);
                 }else{
@@ -57,7 +62,7 @@ public class Main extends SimpleApplication {
                 floatingCubeState = !floatingCubeState;
             }
             if(name.equals("shoot_state") && pressed){
-                System.out.println("Shootable State");
+                logger.info("Shootable State");
                 if(shootableState){
                     stateManager.detach(sts);
                 }else{
@@ -69,17 +74,23 @@ public class Main extends SimpleApplication {
     };
 
     public static void main(String[] args){
+        logger.info("Application Entry");
         Main app = new Main();
         AppSettings settings = new AppSettings(true);
         settings.setTitle("Test Game 01");
         settings.setResolution(1024,768);
         app.setSettings(settings);
+        logger.info("Settings Added");
         app.start();
     }
     @Override
     public void simpleInitApp() {
+        logger.info("Init App");
         ScreenshotAppState screenShotState = new ScreenshotAppState();
         this.stateManager.attach(screenShotState);
+
+        this.stateManager.attach(menu);
+
         initSceneGeometry();
         initSceneUI();
         setKeyMapping();
