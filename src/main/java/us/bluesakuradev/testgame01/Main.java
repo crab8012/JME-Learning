@@ -23,10 +23,7 @@ import com.jme3.util.BufferUtils;
 import com.jme3.util.SkyFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import us.bluesakuradev.testgame01.teststates.AudioTestAppState;
-import us.bluesakuradev.testgame01.teststates.FloatingCubeTestState;
-import us.bluesakuradev.testgame01.teststates.MainMenuState;
-import us.bluesakuradev.testgame01.teststates.ShootableTestState;
+import us.bluesakuradev.testgame01.teststates.*;
 
 import java.awt.*;
 
@@ -36,6 +33,7 @@ public class Main extends SimpleApplication {
     FloatingCubeTestState fcts = new FloatingCubeTestState();
     ShootableTestState sts = new ShootableTestState();
     MainMenuState menu = new MainMenuState();
+    ModelLoadingTestState mlts = new ModelLoadingTestState();
     boolean audioState = false;
     boolean floatingCubeState = false;
     boolean shootableState = false;
@@ -70,6 +68,14 @@ public class Main extends SimpleApplication {
                 }
                 shootableState = !shootableState;
             }
+            if(name.equals("model_state") && pressed){
+                logger.info("Model Test State");
+                if(getStateManager().hasState(mlts)){
+                    stateManager.detach(mlts);
+                }else{
+                    stateManager.attach(mlts);
+                }
+            }
         }
     };
 
@@ -91,15 +97,18 @@ public class Main extends SimpleApplication {
 
         this.stateManager.attach(menu);
 
+        this.getFlyByCamera().setMoveSpeed(20);
+
         initSceneGeometry();
         initSceneUI();
         setKeyMapping();
     }
     private void setKeyMapping(){
-        inputManager.addListener(stateListener, new String[]{"cube_state", "audio_state", "shoot_state"});
+        inputManager.addListener(stateListener, new String[]{"cube_state", "audio_state", "shoot_state", "model_state"});
         inputManager.addMapping("cube_state", new KeyTrigger(KeyInput.KEY_K));
         inputManager.addMapping("audio_state", new KeyTrigger(KeyInput.KEY_L));
         inputManager.addMapping("shoot_state", new KeyTrigger(KeyInput.KEY_J));
+        inputManager.addMapping("model_state", new KeyTrigger(KeyInput.KEY_H));
     }
 
     private void initSceneGeometry(){
