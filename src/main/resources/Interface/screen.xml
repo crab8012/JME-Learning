@@ -23,6 +23,9 @@
                         <control name="button" label="Shootable Object Test" id="shootableTestBtn" align="center" valign="center" visibleToMouse="true" margin="20px">
                             <interact onClick="startShootableTest()"/>
                         </control>
+                        <control name="button" label="Maze Test" id="mazeBtn" align="center" valign="center" visibleToMouse="true" margin="20px" backgroundColor="#070f">
+                            <interact onClick="startMaze()"/>
+                        </control>
                     </panel>
                     <control name="button" label="Quit" id="quitBtn" align="center" valign="center" visibleToMouse="true" margin="20px">
                         <interact onClick="quitBtnClick()"/>

@@ -3,6 +3,8 @@ package us.bluesakuradev.testgame01.teststates;
 import com.jme3.app.Application;
 import com.jme3.app.state.BaseAppState;
 import com.jme3.asset.AssetManager;
+import com.jme3.bullet.BulletAppState;
+import com.jme3.bullet.collision.shapes.MeshCollisionShape;
 import com.jme3.font.BitmapFont;
 import com.jme3.light.DirectionalLight;
 import com.jme3.material.Material;

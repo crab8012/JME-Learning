@@ -4,6 +4,8 @@ import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.BaseAppState;
 import com.jme3.app.state.ScreenshotAppState;
 import com.jme3.font.BitmapText;
+import com.jme3.input.FlyByCamera;
+import com.jme3.input.InputManager;
 import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
@@ -21,8 +23,9 @@ public class Main extends SimpleApplication {
     ShootableTestState sts = new ShootableTestState("sts");
     MainMenuState menu = new MainMenuState();
     ModelLoadingTestState mlts = new ModelLoadingTestState("mlts");
+    MazeState maze = new MazeState("maze");
 
-    BaseAppState[] states = {ats, fcts, sts, mlts};
+    BaseAppState[] states = {ats, fcts, sts, mlts, maze};
 
     final private ActionListener menuCallListener = new ActionListener(){
         @Override
@@ -51,6 +54,7 @@ public class Main extends SimpleApplication {
         app.setSettings(settings);
         app.start();
     }
+
     @Override
     public void simpleInitApp() {
         ScreenshotAppState screenShotState = new ScreenshotAppState();
@@ -105,5 +109,27 @@ public class Main extends SimpleApplication {
     public void startShootableTest(){
         logger.info("Loading Shootable Object Test");
         stateManager.attach(sts);
+    }
+
+    public void startMaze(){
+        logger.info("Loading Maze Test");
+        stateManager.attach(maze);
+    }
+
+    public static void disableFlyCamMovement(InputManager im){
+        im.deleteMapping("FLYCAM_StrafeLeft");
+        im.deleteMapping("FLYCAM_StrafeRight");
+        im.deleteMapping("FLYCAM_Forward");
+        im.deleteMapping("FLYCAM_Backward");
+        im.deleteMapping("FLYCAM_Rise");
+        im.deleteMapping("FLYCAM_Lower");
+    }
+    public static void enableFlyCamMovement(InputManager im){
+        im.addMapping("FLYCAM_StrafeLeft", new KeyTrigger(KeyInput.KEY_A));
+        im.addMapping("FLYCAM_StrafeRight", new KeyTrigger(KeyInput.KEY_D));
+        im.addMapping("FLYCAM_Forward", new KeyTrigger(KeyInput.KEY_W));
+        im.addMapping("FLYCAM_Backward", new KeyTrigger(KeyInput.KEY_S));
+        im.addMapping("FLYCAM_Rise", new KeyTrigger(KeyInput.KEY_Q));
+        im.addMapping("FLYCAM_Lower", new KeyTrigger(KeyInput.KEY_Z));
     }
 }

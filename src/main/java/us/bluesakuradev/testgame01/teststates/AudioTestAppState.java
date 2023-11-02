@@ -66,7 +66,6 @@ public class AudioTestAppState extends BaseAppState {
         envNames = new String[]{"Cavern", "Closet", "Garage", "AcousticLab", "Dungeon"};
         sfxs = new String[]{"ping1", "error", "notif", "thud"};
 
-        logger.info("ATS.initialize");
         // Initialize the appState
         // Set up the SimpleApplication managers
         this.app = (Main) application;
