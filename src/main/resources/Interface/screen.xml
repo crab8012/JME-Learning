@@ -23,9 +23,14 @@
                         <control name="button" label="Shootable Object Test" id="shootableTestBtn" align="center" valign="center" visibleToMouse="true" margin="20px">
                             <interact onClick="startShootableTest()"/>
                         </control>
-                        <control name="button" label="Maze Test" id="mazeBtn" align="center" valign="center" visibleToMouse="true" margin="20px" backgroundColor="#070f">
-                            <interact onClick="startMaze()"/>
-                        </control>
+                        <panel id="maze_btn_panel" childLayout="horizontal">
+                            <control name="button" label="Maze Test" id="mazeBtn" align="center" valign="center" visibleToMouse="true" margin="20px" backgroundColor="#070f">
+                                <interact onClick="startMaze()"/>
+                            </control>
+                            <control name="button" label="Maze Test (Physics Debug)" id="mazePhysBtn" align="center" valign="center" visibleToMouse="true" margin="20px" backgroundColor="#040f">
+                                <interact onClick="startMazeDebug()"/>
+                            </control>
+                        </panel>
                     </panel>
                     <control name="button" label="Quit" id="quitBtn" align="center" valign="center" visibleToMouse="true" margin="20px">
                         <interact onClick="quitBtnClick()"/>

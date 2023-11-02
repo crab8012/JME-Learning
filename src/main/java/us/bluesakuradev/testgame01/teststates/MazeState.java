@@ -3,6 +3,7 @@ package us.bluesakuradev.testgame01.teststates;
 import com.jme3.app.Application;
 import com.jme3.app.state.BaseAppState;
 import com.jme3.asset.AssetManager;
+import com.jme3.asset.TextureKey;
 import com.jme3.audio.AudioRenderer;
 import com.jme3.audio.Environment;
 import com.jme3.bullet.BulletAppState;
@@ -67,6 +68,10 @@ public class MazeState extends BaseAppState implements ActionListener{
 
         mazeModel = assetManager.loadModel("Models/maze.glb");
         Material mat1 = assetManager.loadMaterial("Materials/litpink.j3m");
+        mat1.setColor("Diffuse", ColorRGBA.White);
+        //mat1.setTexture("ColorMap", assetManager.loadTexture("Textures/Maze-UV.png"));
+        // We need to use the TextureKey form because the UVMap loads in upside-down
+        mat1.setTexture("DiffuseMap", assetManager.loadTexture(new TextureKey("Textures/Maze-UV.png", false)));
         mazeModel.setMaterial(mat1);
         Vector3f mazeLocation = new Vector3f(0f,0f, 0f);
         mazeModel.setLocalTranslation(mazeLocation);
@@ -95,9 +100,6 @@ public class MazeState extends BaseAppState implements ActionListener{
     }
 
     private void initPhysics(){
-        // Draw Collider Outlines
-        physicsState.setDebugEnabled(true);
-
         // Setup collision and physics for our environment
         //MeshCollisionShape mazeEnvCollisionShape = (MeshCollisionShape) CollisionShapeFactory.createMeshShape(mazeModel);
         CollisionShape mazeEnvCollisionShape = CollisionShapeFactory.createMeshShape(mazeModel);
@@ -127,7 +129,9 @@ public class MazeState extends BaseAppState implements ActionListener{
 
     @Override
     protected void cleanup(Application application) {
-        physicsState.setDebugEnabled(false);
+        if(physicsState.isDebugEnabled()){
+            physicsState.setDebugEnabled(false);
+        }
         Main.enableFlyCamMovement(inputManager);
         this.app.getStateManager().detach(physicsState);
         this.app.getRootNode().detachChild(this.sceneNode);
@@ -182,5 +186,10 @@ public class MazeState extends BaseAppState implements ActionListener{
         } else if (s.equals("Jump")) {
             player.jump();
         }
+    }
+
+    public void enablePhysicsDebug(){
+        // Draw Collider Outlines
+        physicsState.setDebugEnabled(true);
     }
 }

@@ -5,18 +5,17 @@ This repository contains a single JME3 project using Maven that I will continuou
 ToDo:
 
 My next few commits should encompass multiple things...
-[DONE]
-1) The "Main Menu" should replace the start button with buttons for each test AppState
-2) The "Main Menu" should be callable with "ESC"
-3) The application should no longer close when "ESC" is pressed
-4) Going to the "Main Menu" using "ESC" should disable and detach the current test AppState
+1) The "Main Menu" should replace the start button with buttons for each test AppState[DONE]
+2) The "Main Menu" should be callable with "ESC"[DONE]
+3) The application should no longer close when "ESC" is pressed[DONE]
+4) Going to the "Main Menu" using "ESC" should disable and detach the current test AppState[DONE]
 
 And then:
-5) There should be a new "Maze" AppState
-6) The "Maze" should have a maze model
+5) There should be a new "Maze" AppState[DONE]
+6) The "Maze" should have a maze model[DONE]
 7) The "Maze" should have a UVMapped texture
-8) The "Maze" should have a camera with gravity and collision detection
-9) The player should start within the "Maze"
+8) The "Maze" should have a camera with gravity and collision detection[DONE]
+9) The player should start within the "Maze"[DONE]
 
 After that:
 10) There should be a new "Island" AppState

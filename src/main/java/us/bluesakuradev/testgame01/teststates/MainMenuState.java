@@ -81,7 +81,11 @@ public class MainMenuState extends BaseAppState implements ScreenController {
     }
 
     public void startMaze(){
-        app.startMaze();
+        app.startMaze(false);
+        closeMenu();
+    }
+    public void startMazeDebug(){
+        app.startMaze(true);
         closeMenu();
     }
 

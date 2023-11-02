@@ -111,9 +111,12 @@ public class Main extends SimpleApplication {
         stateManager.attach(sts);
     }
 
-    public void startMaze(){
+    public void startMaze(boolean physDebug){
         logger.info("Loading Maze Test");
         stateManager.attach(maze);
+        if(physDebug){
+            maze.enablePhysicsDebug();
+        }
     }
 
     public static void disableFlyCamMovement(InputManager im){
