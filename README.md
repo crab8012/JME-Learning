@@ -13,7 +13,7 @@ My next few commits should encompass multiple things...
 And then:
 5) There should be a new "Maze" AppState[DONE]
 6) The "Maze" should have a maze model[DONE]
-7) The "Maze" should have a UVMapped texture
+7) The "Maze" should have a UVMapped texture[DONE]
 8) The "Maze" should have a camera with gravity and collision detection[DONE]
 9) The player should start within the "Maze"[DONE]
 
