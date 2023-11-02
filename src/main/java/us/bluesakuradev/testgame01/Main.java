@@ -1,97 +1,58 @@
 package us.bluesakuradev.testgame01;
 
 import com.jme3.app.SimpleApplication;
+import com.jme3.app.state.BaseAppState;
 import com.jme3.app.state.ScreenshotAppState;
-import com.jme3.app.state.VideoRecorderAppState;
-import com.jme3.audio.AudioData;
-import com.jme3.audio.AudioNode;
-import com.jme3.audio.Environment;
 import com.jme3.font.BitmapText;
 import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
-import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
-import com.jme3.math.Quaternion;
-import com.jme3.math.Vector3f;
-import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
-import com.jme3.scene.shape.Box;
-import com.jme3.scene.shape.Sphere;
 import com.jme3.system.AppSettings;
-import com.jme3.util.BufferUtils;
-import com.jme3.util.SkyFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import us.bluesakuradev.testgame01.teststates.*;
 
-import java.awt.*;
-
 public class Main extends SimpleApplication {
     static final Logger logger = LogManager.getLogger(Main.class.getName());
-    AudioTestAppState ats = new AudioTestAppState();
-    FloatingCubeTestState fcts = new FloatingCubeTestState();
-    ShootableTestState sts = new ShootableTestState();
+    AudioTestAppState ats = new AudioTestAppState("ats");
+    FloatingCubeTestState fcts = new FloatingCubeTestState("fcts");
+    ShootableTestState sts = new ShootableTestState("sts");
     MainMenuState menu = new MainMenuState();
-    ModelLoadingTestState mlts = new ModelLoadingTestState();
-    boolean audioState = false;
-    boolean floatingCubeState = false;
-    boolean shootableState = false;
+    ModelLoadingTestState mlts = new ModelLoadingTestState("mlts");
 
-    final private ActionListener stateListener = new ActionListener() {
+    BaseAppState[] states = {ats, fcts, sts, mlts};
+
+    final private ActionListener menuCallListener = new ActionListener(){
         @Override
-        public void onAction(String name, boolean pressed, float tpf) {
-            if(name.equals("audio_state") && pressed){
-                logger.info("Audio State");
-                if(audioState){
-                    stateManager.detach(ats);
-                }else{
-                    stateManager.attach(ats);
+        public void onAction(String name, boolean pressed, float tpf){
+            if(name.equals("menu") && pressed){
+                logger.info("Pressed Menu Key");
+
+                for(BaseAppState s : states){
+                    if(stateManager.hasState(s)){
+                        logger.info("Closing State " + s.getId());
+                        stateManager.detach(s);
+                    }
                 }
-                audioState = !audioState;
-            }
-            if(name.equals("cube_state") && pressed){
-                logger.info("Cube State");
-                if(floatingCubeState){
-                    stateManager.detach(fcts);
-                }else{
-                    stateManager.attach(fcts);
-                }
-                floatingCubeState = !floatingCubeState;
-            }
-            if(name.equals("shoot_state") && pressed){
-                logger.info("Shootable State");
-                if(shootableState){
-                    stateManager.detach(sts);
-                }else{
-                    stateManager.attach(sts);
-                }
-                shootableState = !shootableState;
-            }
-            if(name.equals("model_state") && pressed){
-                logger.info("Model Test State");
-                if(getStateManager().hasState(mlts)){
-                    stateManager.detach(mlts);
-                }else{
-                    stateManager.attach(mlts);
-                }
+
+                logger.info("Opening Main Menu");
+                stateManager.attach(menu);
             }
         }
     };
 
     public static void main(String[] args){
-        logger.info("Application Entry");
         Main app = new Main();
         AppSettings settings = new AppSettings(true);
         settings.setTitle("Test Game 01");
         settings.setResolution(1024,768);
         app.setSettings(settings);
-        logger.info("Settings Added");
         app.start();
     }
     @Override
     public void simpleInitApp() {
-        logger.info("Init App");
         ScreenshotAppState screenShotState = new ScreenshotAppState();
         this.stateManager.attach(screenShotState);
 
@@ -104,11 +65,12 @@ public class Main extends SimpleApplication {
         setKeyMapping();
     }
     private void setKeyMapping(){
-        inputManager.addListener(stateListener, new String[]{"cube_state", "audio_state", "shoot_state", "model_state"});
-        inputManager.addMapping("cube_state", new KeyTrigger(KeyInput.KEY_K));
-        inputManager.addMapping("audio_state", new KeyTrigger(KeyInput.KEY_L));
-        inputManager.addMapping("shoot_state", new KeyTrigger(KeyInput.KEY_J));
-        inputManager.addMapping("model_state", new KeyTrigger(KeyInput.KEY_H));
+        // Remove "ESC" from closing the application
+        inputManager.deleteMapping( SimpleApplication.INPUT_MAPPING_EXIT );
+
+        // Create a listener and binding for the main menu
+        inputManager.addListener(menuCallListener, "menu");
+        inputManager.addMapping("menu", new KeyTrigger(KeyInput.KEY_ESCAPE));
     }
 
     private void initSceneGeometry(){
@@ -125,18 +87,23 @@ public class Main extends SimpleApplication {
         gui.attachChild(hudTxt);
     }
 
-    @Override
-    public void simpleUpdate(float tpf){
-        // TODO: Add update code
-        moveGeometry();
-        updateGUI();
+    public void startSimpleAudioTest(){
+        logger.info("Loading Simple Audio Test");
+        stateManager.attach(ats);
     }
 
-    public void moveGeometry(){
-
+    public void startFloatingCubeTest(){
+        logger.info("Loading Floating Cube Test");
+        stateManager.attach(fcts);
     }
 
-    public void updateGUI(){
+    public void startModelLoadingTest(){
+        logger.info("Loading Model Loading Test");
+        stateManager.attach(mlts);
+    }
 
+    public void startShootableTest(){
+        logger.info("Loading Shootable Object Test");
+        stateManager.attach(sts);
     }
 }

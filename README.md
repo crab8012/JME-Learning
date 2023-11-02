@@ -5,6 +5,7 @@ This repository contains a single JME3 project using Maven that I will continuou
 ToDo:
 
 My next few commits should encompass multiple things...
+[DONE]
 1) The "Main Menu" should replace the start button with buttons for each test AppState
 2) The "Main Menu" should be callable with "ESC"
 3) The application should no longer close when "ESC" is pressed

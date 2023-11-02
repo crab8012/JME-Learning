@@ -4,11 +4,6 @@ import com.jme3.app.Application;
 import com.jme3.app.state.BaseAppState;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import de.lessvoid.nifty.Nifty;
-import de.lessvoid.nifty.builder.LayerBuilder;
-import de.lessvoid.nifty.builder.PanelBuilder;
-import de.lessvoid.nifty.builder.ScreenBuilder;
-import de.lessvoid.nifty.controls.button.builder.ButtonBuilder;
-import de.lessvoid.nifty.screen.DefaultScreenController;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 import org.apache.logging.log4j.LogManager;
@@ -26,11 +21,11 @@ public class MainMenuState extends BaseAppState implements ScreenController {
     NiftyJmeDisplay niftyDisplay;
     Nifty nifty;
 
+
     @Override
     protected void initialize(Application application) {
         app = (Main) application;
         this.application = application;
-        logger.info("Main Menu INIT");
     }
 
     @Override
@@ -40,7 +35,6 @@ public class MainMenuState extends BaseAppState implements ScreenController {
 
     @Override
     protected void onEnable() {
-        logger.info("Main Menu ENABLE");
         niftyDisplay = NiftyJmeDisplay.newNiftyJmeDisplay(app.getAssetManager(), app.getInputManager(),
                 app.getAudioRenderer(), app.getGuiViewPort());
 
@@ -50,7 +44,6 @@ public class MainMenuState extends BaseAppState implements ScreenController {
         nifty.addXml("Interface/screen.xml");
 
         app.getGuiViewPort().addProcessor(niftyDisplay);
-        logger.info("Enabling FlyByCamera DragToRotate");
         app.getFlyByCamera().setDragToRotate(true);
 
         nifty.gotoScreen("start");
@@ -58,15 +51,40 @@ public class MainMenuState extends BaseAppState implements ScreenController {
 
     @Override
     protected void onDisable() {
-        logger.info("Main Menu Disable");
-        logger.info("Trying Nifty.exit()");
         nifty.exit();
-        logger.info("Disabling FlyByCamera DragToRotate");
         app.getFlyByCamera().setDragToRotate(false);
     }
 
+    public void closeMenu(){
+        logger.info("Closing Main Menu");
+        getApplication().getStateManager().detach(this);
+    }
 
-    // Nifty GUI
+    public void startSimpleAudioTest(){
+        app.startSimpleAudioTest();
+        closeMenu();
+    }
+
+    public void startFloatingCubeTest(){
+        app.startFloatingCubeTest();
+        closeMenu();
+    }
+
+    public void startModelLoadingTest(){
+        app.startModelLoadingTest();
+        closeMenu();
+    }
+
+    public void startShootableTest(){
+        app.startShootableTest();
+        closeMenu();
+    }
+
+    public void quitBtnClick(){
+        logger.info("Quitting the Game");
+        getApplication().stop();
+    }
+
     @Override
     public void bind(@Nonnull Nifty nifty, @Nonnull Screen screen) {
 
@@ -80,14 +98,5 @@ public class MainMenuState extends BaseAppState implements ScreenController {
     @Override
     public void onEndScreen() {
 
-    }
-
-    public void startBtnClick(){
-        logger.info("Closing Main Menu");
-        getApplication().getStateManager().detach(this);
-    }
-    public void quitBtnClick(){
-        logger.info("Quitting the Game");
-        getApplication().stop();
     }
 }

@@ -19,6 +19,9 @@ import com.jme3.util.SkyFactory;
 import us.bluesakuradev.testgame01.Main;
 
 public class FloatingCubeTestState extends BaseAppState {
+    public FloatingCubeTestState(String id){
+        super(id);
+    }
     private final float boxMaxUp = 2f;
     private final float boxMaxDown = -2f;
     private final float boxMovementSnapping = 0.001f;

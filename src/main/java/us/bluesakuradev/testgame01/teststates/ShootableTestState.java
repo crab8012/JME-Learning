@@ -23,6 +23,9 @@ import org.apache.logging.log4j.Logger;
 import us.bluesakuradev.testgame01.Main;
 
 public class ShootableTestState extends BaseAppState {
+    public ShootableTestState(String id){
+        super(id);
+    }
     static final Logger logger = LogManager.getLogger(ShootableTestState.class.getName());
     Main app;
     AssetManager assetManager;

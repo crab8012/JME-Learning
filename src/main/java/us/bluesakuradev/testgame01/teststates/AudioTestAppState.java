@@ -22,6 +22,9 @@ import us.bluesakuradev.testgame01.AudioManager;
 import us.bluesakuradev.testgame01.Main;
 
 public class AudioTestAppState extends BaseAppState {
+    public AudioTestAppState(String id){
+        super(id);
+    }
     static final Logger logger = LogManager.getLogger(AudioTestAppState.class.getName());
     final private ActionListener customActionListener = new ActionListener() {
         @Override

@@ -15,6 +15,9 @@ import us.bluesakuradev.testgame01.Main;
 import java.util.Vector;
 
 public class ModelLoadingTestState extends BaseAppState {
+    public ModelLoadingTestState(String id){
+        super(id);
+    }
     Main app;
     AssetManager assetManager;
     Node sceneNode;

@@ -10,9 +10,20 @@
             </panel>
             <panel id="panel_mid" height="50%" width="75%" align="center" childLayout="center">
                 <panel id="center_btn_panel" childLayout="horizontal">
-                    <control name="button" label="Start" id="startBtn" align="center" valign="center" visibleToMouse="true" margin="20px">
-                        <interact onClick="startBtnClick()"/>
-                    </control>
+                    <panel id="demo_button_list" childLayout="vertical">
+                        <control name="button" label="Simple Audio Test" id="simpleAudioTestBtn" align="center" valign="center" visibleToMouse="true" margin="20px">
+                            <interact onClick="startSimpleAudioTest()"/>
+                        </control>
+                        <control name="button" label="Floating Cube Test" id="floatingCubeTestBtn" align="center" valign="center" visibleToMouse="true" margin="20px">
+                            <interact onClick="startFloatingCubeTest()"/>
+                        </control>
+                        <control name="button" label="Model Loading Test" id="modelLoadingTestBtn" align="center" valign="center" visibleToMouse="true" margin="20px">
+                            <interact onClick="startModelLoadingTest()"/>
+                        </control>
+                        <control name="button" label="Shootable Object Test" id="shootableTestBtn" align="center" valign="center" visibleToMouse="true" margin="20px">
+                            <interact onClick="startShootableTest()"/>
+                        </control>
+                    </panel>
                     <control name="button" label="Quit" id="quitBtn" align="center" valign="center" visibleToMouse="true" margin="20px">
                         <interact onClick="quitBtnClick()"/>
                     </control>
