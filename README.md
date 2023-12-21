@@ -10,14 +10,14 @@ My next few commits should encompass multiple things...
 3) The application should no longer close when "ESC" is pressed[DONE]
 4) Going to the "Main Menu" using "ESC" should disable and detach the current test AppState[DONE]
 
-And then:
+---
 5) There should be a new "Maze" AppState[DONE]
 6) The "Maze" should have a maze model[DONE]
 7) The "Maze" should have a UVMapped texture[DONE]
 8) The "Maze" should have a camera with gravity and collision detection[DONE]
 9) The player should start within the "Maze"[DONE]
 
-After that:
+---
 10) There should be a new "Island" AppState [DONE]
 11) The Island should have a small-ish island model [REPLACE WITH #19]
 12) The Island model should have a sand texture [DONE]
@@ -27,12 +27,12 @@ After that:
 16) The Island sound should change when the player walks on the bridge [DONE]
 17) The Island should be surrounded by a SeaMonkey WaterFilter (aka a big ocean) [DONE]
 
-Then:
+---
 18) There should be a different "Island" AppState [MERGED WITH FIRST ISLAND APPSTATE]
 19) Instead of using an island model, it should use JMonkeyEngine's Terrain features [DONE]
 20) The Island V2 should have an animated creature somewhere [DONE]
 
-And:
+---
 21) There should be a cave AppState that the player can walk around in [DONE]
 22) It should have ambient lighting from a campfire in the middle [MAYBE]
 23) There should be smoke particle effects coming off the fire [DONE]
