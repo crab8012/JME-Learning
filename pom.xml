@@ -66,6 +66,11 @@
             <artifactId>jme3-jbullet</artifactId>
             <version>3.6.1-stable</version>
         </dependency>
+        <dependency>
+            <groupId>org.jmonkeyengine</groupId>
+            <artifactId>jme3-effects</artifactId>
+            <version>3.6.1-stable</version>
+        </dependency>
     </dependencies>
 
 </project>

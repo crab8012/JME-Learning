@@ -25,6 +25,8 @@ import com.jme3.light.AmbientLight;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
+import com.jme3.post.Filter;
+import com.jme3.post.FilterPostProcessor;
 import com.jme3.renderer.Camera;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
@@ -38,6 +40,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import us.bluesakuradev.testgame01.AudioManager;
 import us.bluesakuradev.testgame01.Main;
+import com.jme3.water.WaterFilter;
 
 import java.util.Random;
 
@@ -58,7 +61,7 @@ public class IslandState extends BaseAppState implements ActionListener, Physics
     static String island_splatTexture = "Textures/Island/Island_SplatMap.png";
     static String island_grassTexture = "Textures/Island/Island_Grass.png";
     static String island_dirtTexture = "Textures/Island/Island_Sand.jpg";
-    static String island_roadTexture = "Textures/Island/Island_Road.jpg";
+    static String island_roadTexture = "Textures/Island/Island_Road.png";
     static String island_heightMapTexture = "Textures/Island/Island_HeightMap.png";
 
     static Vector3f bridgeLocation = new Vector3f(48f, -33f, -5f);
@@ -82,6 +85,13 @@ public class IslandState extends BaseAppState implements ActionListener, Physics
     final private Vector3f walkDirection = new Vector3f();
 
     String player_standing_material = "";
+
+
+    // Water Stuff
+    FilterPostProcessor fpp;
+    WaterFilter water;
+    float initialWaterHeight = -33f;
+    Vector3f lightDir = new Vector3f(-4.9f, -1.3f, 5.9f);
 
     @Override
     protected void initialize(Application application) {
@@ -107,7 +117,17 @@ public class IslandState extends BaseAppState implements ActionListener, Physics
 
         initCameraPosReadout();
 
+        initWater();
+
         this.app.getRootNode().attachChild(this.sceneNode);
+    }
+
+    public void initWater(){
+        fpp = new FilterPostProcessor(assetManager);
+        water = new WaterFilter(sceneNode, lightDir);
+        water.setWaterHeight(initialWaterHeight);
+        fpp.addFilter(water);
+        app.getViewPort().addProcessor(fpp);
     }
 
     private void initCameraPosReadout() {
@@ -252,15 +272,15 @@ public class IslandState extends BaseAppState implements ActionListener, Physics
             int sound = random.nextInt(3);
             switch(sound){
                 case 0:
-                    logger.info("Selecting sound sand1");
+                    logger.debug("Selecting sound sand1");
                     sfx = audioManager.getSfx("sand1");
                     break;
                 case 1:
-                    logger.info("Selecting sound sand2");
+                    logger.debug("Selecting sound sand2");
                     sfx = audioManager.getSfx("sand2");
                     break;
                 case 2:
-                    logger.info("Selecting sound sand3");
+                    logger.debug("Selecting sound sand3");
                     sfx = audioManager.getSfx("sand3");
                     break;
             }
@@ -269,15 +289,15 @@ public class IslandState extends BaseAppState implements ActionListener, Physics
             int sound = random.nextInt(3);
             switch(sound){
                 case 0:
-                    logger.info("Selecting sound wood1");
+                    logger.debug("Selecting sound wood1");
                     sfx = audioManager.getSfx("wood1");
                     break;
                 case 1:
-                    logger.info("Selecting sound wood2");
+                    logger.debug("Selecting sound wood2");
                     sfx = audioManager.getSfx("wood2");
                     break;
                 case 2:
-                    logger.info("Selecting sound wood3");
+                    logger.debug("Selecting sound wood3");
                     sfx = audioManager.getSfx("wood3");
                     break;
             }
@@ -286,7 +306,7 @@ public class IslandState extends BaseAppState implements ActionListener, Physics
 
         if(playableSound){
             if(sfx == null){
-                logger.error("Selected Sound is Null");
+                logger.error("Selected Step Sound is Null");
             }else{
                 sfx.play();
             }
@@ -323,7 +343,7 @@ public class IslandState extends BaseAppState implements ActionListener, Physics
         // If the player is moving
         if(left | right | up | down){
             if(player.onGround()){
-                logger.info("Player moved on ground");
+                logger.debug("Player moved on ground");
                 randomWalkSound(player_standing_material);
             }
         }
@@ -342,6 +362,8 @@ public class IslandState extends BaseAppState implements ActionListener, Physics
 
         this.app.getRootNode().detachChild(this.sceneNode);
         this.app.getGuiNode().detachChild(this.camPosTxt);
+
+        this.app.getViewPort().removeProcessor(fpp);
     }
 
     @Override
@@ -374,16 +396,16 @@ public class IslandState extends BaseAppState implements ActionListener, Physics
         //logger.info("Collision: " + physicsCollisionEvent.getNodeA().getName() + " " + physicsCollisionEvent.getNodeB().getName());
         Boolean isNodeNull = false;
         if(physicsCollisionEvent.getNodeA() == null){
-            logger.info("Physics Node A is Null");
+            logger.debug("Physics Node A is Null");
             isNodeNull = true;
         }else{
-            logger.info("Physics Node A is " + physicsCollisionEvent.getNodeA());
+            logger.debug("Physics Node A is " + physicsCollisionEvent.getNodeA());
         }
         if(physicsCollisionEvent.getNodeB() == null){
-            logger.info("Physics Node B is Null");
+            logger.debug("Physics Node B is Null");
             isNodeNull = true;
         }else{
-            logger.info("Physics Node B is " + physicsCollisionEvent.getNodeB());
+            logger.debug("Physics Node B is " + physicsCollisionEvent.getNodeB());
         }
 
         //if(isNodeNull){
