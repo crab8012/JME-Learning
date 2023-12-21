@@ -45,6 +45,7 @@ public class IslandState extends BaseAppState implements ActionListener {
     static String island_heightMapTexture = "Textures/Island/Island_HeightMap.png";
 
     static Vector3f bridgeLocation = new Vector3f(48f, -32f, -5f);
+    static Vector3f treeLocation = new Vector3f(-26f, -32f, 6f);
 
     BitmapFont guiFont;
     BitmapText camPosTxt;
@@ -58,7 +59,7 @@ public class IslandState extends BaseAppState implements ActionListener {
         cam = app.getCamera();
         app.getFlyByCamera().setMoveSpeed(50f);
         initIsland();
-        initBridge();
+        initModels();
         initLighting();
 
         initCameraPosReadout();
@@ -123,11 +124,12 @@ public class IslandState extends BaseAppState implements ActionListener {
         terrain.addControl(control);
     }
 
-    private void initBridge(){
+    private void initModels(){
+        /*   Dock/Bridge at edge of island */
         Spatial bridgeModel = assetManager.loadModel("Models/bridge.glb");
         Material bridgeMat = assetManager.loadMaterial("Materials/litpink.j3m");
         bridgeMat.setColor("Diffuse", ColorRGBA.White);
-        //mat1.setTexture("ColorMap", assetManager.loadTexture("Textures/Maze-UV.png"));
+        bridgeMat.setColor("Ambient", ColorRGBA.White);
         // We need to use the TextureKey form because the UVMap loads in upside-down
         bridgeMat.setTexture("DiffuseMap", assetManager.loadTexture(new TextureKey("Textures/Models/bridge.png", false)));
         bridgeModel.setMaterial(bridgeMat);
@@ -136,6 +138,18 @@ public class IslandState extends BaseAppState implements ActionListener {
         bridgeModel.scale(2f);
         bridgeModel.rotate(0f, 1.5708f, 0f);
         sceneNode.attachChild(bridgeModel);
+
+        /* Tree in middle of island */
+        Spatial treeModel = assetManager.loadModel("Models/umbrella_tree.glb");
+        Material treeMat = assetManager.loadMaterial("Materials/litpink.j3m");
+        treeMat.setColor("Diffuse", ColorRGBA.White);
+        treeMat.setColor("Ambient", ColorRGBA.White);
+        // We need to use the TextureKey form because the UVMap loads in upside-down
+        treeMat.setTexture("DiffuseMap", assetManager.loadTexture(new TextureKey("Textures/Models/tree.png", false)));
+        treeModel.setMaterial(treeMat);
+
+        treeModel.setLocalTranslation(treeLocation);
+        sceneNode.attachChild(treeModel);
     }
 
     private void initLighting(){
