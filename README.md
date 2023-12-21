@@ -21,10 +21,10 @@ After that:
 10) There should be a new "Island" AppState [DONE]
 11) The Island should have a small-ish island model [REPLACE WITH #19]
 12) The Island model should have a sand texture [DONE]
-13) The Island should have a tree or plant model on it (separate model)
-14) The Island should have a dock model on the edge (separate model)
-15) The Island should have sounds that play when the player walks on the sand
-16) The Island sound should change when the player walks on the bridge
+13) The Island should have a tree or plant model on it (separate model) [DONE]
+14) The Island should have a dock model on the edge (separate model) [DONE]
+15) The Island should have sounds that play when the player walks on the sand [DONE]
+16) The Island sound should change when the player walks on the bridge [DONE]
 17) The Island should be surrounded by a SeaMonkey WaterFilter (aka a big ocean)
 
 Then:
