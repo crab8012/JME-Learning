@@ -3,11 +3,18 @@ package us.bluesakuradev.testgame01.teststates;
 import com.jme3.app.Application;
 import com.jme3.app.state.BaseAppState;
 import com.jme3.asset.AssetManager;
+import com.jme3.asset.TextureKey;
+import com.jme3.font.BitmapFont;
+import com.jme3.font.BitmapText;
 import com.jme3.input.InputManager;
 import com.jme3.input.controls.ActionListener;
+import com.jme3.light.AmbientLight;
 import com.jme3.material.Material;
+import com.jme3.math.ColorRGBA;
+import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.jme3.scene.Node;
+import com.jme3.scene.Spatial;
 import com.jme3.terrain.geomipmap.TerrainLodControl;
 import com.jme3.terrain.geomipmap.TerrainQuad;
 import com.jme3.terrain.geomipmap.lodcalc.DistanceLodCalculator;
@@ -37,6 +44,11 @@ public class IslandState extends BaseAppState implements ActionListener {
     static String island_roadTexture = "Textures/Island/Island_Road.jpg";
     static String island_heightMapTexture = "Textures/Island/Island_HeightMap.png";
 
+    static Vector3f bridgeLocation = new Vector3f(48f, -32f, -5f);
+
+    BitmapFont guiFont;
+    BitmapText camPosTxt;
+
     @Override
     protected void initialize(Application application) {
         app = (Main) application;
@@ -46,8 +58,25 @@ public class IslandState extends BaseAppState implements ActionListener {
         cam = app.getCamera();
         app.getFlyByCamera().setMoveSpeed(50f);
         initIsland();
+        initBridge();
+        initLighting();
+
+        initCameraPosReadout();
 
         this.app.getRootNode().attachChild(this.sceneNode);
+    }
+
+    private void initCameraPosReadout() {
+        this.guiFont = this.assetManager.loadFont("Interface/Fonts/Default.fnt");
+
+        camPosTxt = new BitmapText(guiFont, false);
+        camPosTxt.setSize(guiFont.getCharSet().getRenderedSize());
+        camPosTxt.setColor(ColorRGBA.Green);
+        camPosTxt.setText("0, 0, 0 (0, 0, 0)");
+        camPosTxt.setLocalTranslation(300, camPosTxt.getLineHeight()*2, 0);
+
+        app.getGuiNode().attachChild(this.camPosTxt);
+
     }
 
     public void initIsland(){
@@ -94,9 +123,41 @@ public class IslandState extends BaseAppState implements ActionListener {
         terrain.addControl(control);
     }
 
+    private void initBridge(){
+        Spatial bridgeModel = assetManager.loadModel("Models/bridge.glb");
+        Material bridgeMat = assetManager.loadMaterial("Materials/litpink.j3m");
+        bridgeMat.setColor("Diffuse", ColorRGBA.White);
+        //mat1.setTexture("ColorMap", assetManager.loadTexture("Textures/Maze-UV.png"));
+        // We need to use the TextureKey form because the UVMap loads in upside-down
+        bridgeMat.setTexture("DiffuseMap", assetManager.loadTexture(new TextureKey("Textures/Models/bridge.png", false)));
+        bridgeModel.setMaterial(bridgeMat);
+
+        bridgeModel.setLocalTranslation(bridgeLocation);
+        bridgeModel.scale(2f);
+        bridgeModel.rotate(0f, 1.5708f, 0f);
+        sceneNode.attachChild(bridgeModel);
+    }
+
+    private void initLighting(){
+        AmbientLight sceneLight = new AmbientLight();
+        sceneLight.setColor(ColorRGBA.White.mult(0.5f));
+
+        sceneNode.addLight(sceneLight);
+    }
+
+    @Override
+    public void update(float tps){
+        Vector3f camLoc = this.cam.getLocation();
+        Vector3f camRot = this.cam.getDirection();
+        String txt = "[%f, %f, %f](%f, %f, %f)";
+        this.camPosTxt.setText(String.format(txt, camLoc.getX(), camLoc.getY(), camLoc.getZ(),
+                                                  camRot.getX(), camRot.getY(), camRot.getZ()));
+    }
+
     @Override
     protected void cleanup(Application application) {
         this.app.getRootNode().detachChild(this.sceneNode);
+        this.app.getGuiNode().detachChild(this.camPosTxt);
     }
 
     @Override
