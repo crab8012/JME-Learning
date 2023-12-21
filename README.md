@@ -25,12 +25,12 @@ After that:
 14) The Island should have a dock model on the edge (separate model) [DONE]
 15) The Island should have sounds that play when the player walks on the sand [DONE]
 16) The Island sound should change when the player walks on the bridge [DONE]
-17) The Island should be surrounded by a SeaMonkey WaterFilter (aka a big ocean)
+17) The Island should be surrounded by a SeaMonkey WaterFilter (aka a big ocean) [DONE]
 
 Then:
 18) There should be a different "Island" AppState [MERGED WITH FIRST ISLAND APPSTATE]
 19) Instead of using an island model, it should use JMonkeyEngine's Terrain features [DONE]
-20) The Island V2 should have an animated creature somewhere
+20) The Island V2 should have an animated creature somewhere [DONE]
 
 And:
 21) There should be a cave AppState that the player can walk around in

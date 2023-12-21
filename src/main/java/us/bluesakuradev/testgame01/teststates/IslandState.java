@@ -1,5 +1,7 @@
 package us.bluesakuradev.testgame01.teststates;
 
+import com.jme3.anim.AnimComposer;
+import com.jme3.anim.util.AnimMigrationUtils;
 import com.jme3.app.Application;
 import com.jme3.app.state.BaseAppState;
 import com.jme3.asset.AssetManager;
@@ -66,9 +68,11 @@ public class IslandState extends BaseAppState implements ActionListener, Physics
 
     static Vector3f bridgeLocation = new Vector3f(48f, -33f, -5f);
     static Vector3f treeLocation = new Vector3f(-26f, -32f, 6f);
+    static Vector3f boxGuyLocation = new Vector3f(-20f, -31f, 0f);
 
     Spatial treeModel;
     Spatial bridgeModel;
+    Spatial boxGuyModel;
 
     TerrainQuad terrain;
 
@@ -119,7 +123,38 @@ public class IslandState extends BaseAppState implements ActionListener, Physics
 
         initWater();
 
+        initBoxGuy();
+
         this.app.getRootNode().attachChild(this.sceneNode);
+    }
+
+    private void initBoxGuy() {
+        /*   Dock/Bridge at edge of island */
+        boxGuyModel = assetManager.loadModel("Models/BoxGuy.glb");
+        Material boxGuyMat = assetManager.loadMaterial("Materials/litpink.j3m");
+        boxGuyMat.setColor("Diffuse", ColorRGBA.White);
+        boxGuyMat.setColor("Ambient", ColorRGBA.White);
+        // We need to use the TextureKey form because the UVMap loads in upside-down
+        boxGuyMat.setTexture("DiffuseMap", assetManager.loadTexture(new TextureKey("Textures/Models/boxGuy.png", false)));
+        boxGuyModel.setMaterial(boxGuyMat);
+
+        boxGuyModel.setLocalTranslation(boxGuyLocation);
+        boxGuyModel.scale(2f);
+        //boxGuyModel.rotate(0f, 1.5708f, 0f); // Angles are in radians
+        boxGuyModel.setName("BoxGuy");
+        sceneNode.attachChild(boxGuyModel);
+
+        logger.info("Adding BoxGuy Animations");
+        //AnimMigrationUtils.migrate(boxGuyModel);
+        //AnimComposer animComposer = boxGuyModel.getControl(AnimComposer.class);
+        Node charNode = (Node)boxGuyModel;
+        Node armature = (Node)charNode.getChild("Armature");
+        AnimComposer animComposer = armature.getControl(AnimComposer.class);
+        if(animComposer != null){
+            animComposer.setCurrentAction("Wave");
+        }else{
+            logger.error("Animation Composer is null");
+        }
     }
 
     public void initWater(){

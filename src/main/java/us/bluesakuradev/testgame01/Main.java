@@ -12,6 +12,7 @@ import com.jme3.input.controls.KeyTrigger;
 import com.jme3.math.ColorRGBA;
 import com.jme3.scene.Node;
 import com.jme3.system.AppSettings;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import us.bluesakuradev.testgame01.teststates.*;
@@ -54,6 +55,7 @@ public class Main extends SimpleApplication {
         settings.setTitle("Test Game 01");
         settings.setResolution(1024,768);
         app.setSettings(settings);
+        java.util.logging.Logger.getLogger("").setLevel(java.util.logging.Level.OFF);
         app.start();
     }
 
