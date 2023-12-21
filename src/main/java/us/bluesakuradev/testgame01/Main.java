@@ -27,9 +27,9 @@ public class Main extends SimpleApplication {
     MazeState maze = new MazeState("maze");
 
     IslandState island = new IslandState("island");
-    CaveState cave = new CaveState("island");
+    CaveState cave = new CaveState("cave");
 
-    BaseAppState[] states = {ats, fcts, sts, mlts, maze};
+    BaseAppState[] states = {ats, fcts, sts, mlts, maze, island, cave};
 
     final private ActionListener menuCallListener = new ActionListener(){
         @Override
