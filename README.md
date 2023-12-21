@@ -18,9 +18,9 @@ And then:
 9) The player should start within the "Maze"[DONE]
 
 After that:
-10) There should be a new "Island" AppState
-11) The Island should have a small-ish island model
-12) The Island model should have a sand texture
+10) There should be a new "Island" AppState [DONE]
+11) The Island should have a small-ish island model [REPLACE WITH #19]
+12) The Island model should have a sand texture [DONE]
 13) The Island should have a tree or plant model on it (separate model)
 14) The Island should have a dock model on the edge (separate model)
 15) The Island should have sounds that play when the player walks on the sand
@@ -28,8 +28,8 @@ After that:
 17) The Island should be surrounded by a SeaMonkey WaterFilter (aka a big ocean)
 
 Then:
-18) There should be a different "Island" AppState
-19) Instead of using an island model, it should use JMonkeyEngine's Terrain features
+18) There should be a different "Island" AppState [MERGED WITH FIRST ISLAND APPSTATE]
+19) Instead of using an island model, it should use JMonkeyEngine's Terrain features [DONE]
 20) The Island V2 should have an animated creature somewhere
 
 And:

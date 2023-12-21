@@ -38,7 +38,7 @@ public class MazeState extends BaseAppState implements ActionListener{
     public MazeState(String id){
         super(id);
     }
-    static final Logger logger = LogManager.getLogger(AudioTestAppState.class.getName());
+    static final Logger logger = LogManager.getLogger(MazeState.class.getName());
 
     private Main app;
     private Node sceneNode;

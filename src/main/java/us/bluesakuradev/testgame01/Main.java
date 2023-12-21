@@ -25,6 +25,8 @@ public class Main extends SimpleApplication {
     ModelLoadingTestState mlts = new ModelLoadingTestState("mlts");
     MazeState maze = new MazeState("maze");
 
+    IslandState island = new IslandState("island");
+
     BaseAppState[] states = {ats, fcts, sts, mlts, maze};
 
     final private ActionListener menuCallListener = new ActionListener(){
@@ -117,6 +119,11 @@ public class Main extends SimpleApplication {
         if(physDebug){
             maze.enablePhysicsDebug();
         }
+    }
+
+    public void startIsland(){
+        logger.info("Loading Island Test");
+        stateManager.attach(island);
     }
 
     public static void disableFlyCamMovement(InputManager im){

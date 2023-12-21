@@ -31,6 +31,9 @@
                                 <interact onClick="startMazeDebug()"/>
                             </control>
                         </panel>
+                        <control name="button" label="Island Test" id="IslandTestBtn" align="center" valign="center" visibleToMouse="true" margin="20px">
+                            <interact onClick="startIsland()"/>
+                        </control>
                     </panel>
                     <control name="button" label="Quit" id="quitBtn" align="center" valign="center" visibleToMouse="true" margin="20px">
                         <interact onClick="quitBtnClick()"/>
