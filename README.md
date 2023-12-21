@@ -33,15 +33,15 @@ Then:
 20) The Island V2 should have an animated creature somewhere [DONE]
 
 And:
-21) There should be a cave AppState that the player can walk around in
-22) It should have ambient lighting from a campfire in the middle
-23) There should be smoke particle effects coming off the fire
+21) There should be a cave AppState that the player can walk around in [DONE]
+22) It should have ambient lighting from a campfire in the middle [MAYBE]
+23) There should be smoke particle effects coming off the fire [DONE]
 24) There should be positional audio with fire noise
 25) There should be positional audio of rain from the mouth of the cave
 26) The audio scene/fx should change as the player leaves the cave
 27) There should be rain particles from outside
 28) There should be occasional water drip particles and noises from the roof of the cave
-29) There should be at least one torch on the wall with ambient lighting making the cave glow a little
+29) There should be at least one torch on the wall with ambient lighting making the cave glow a little [DONE]
 30) There should be a small table with a ball on it
 31) The player should be able to push the ball off the table
 32) The ball should act "realistically" as it falls off the table

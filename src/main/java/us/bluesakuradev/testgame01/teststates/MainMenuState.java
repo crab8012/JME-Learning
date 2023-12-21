@@ -94,6 +94,11 @@ public class MainMenuState extends BaseAppState implements ScreenController {
         closeMenu();
     }
 
+    public void startCave(){
+        app.startCave();
+        closeMenu();
+    }
+
     public void quitBtnClick(){
         logger.info("Quitting the Game");
         getApplication().stop();

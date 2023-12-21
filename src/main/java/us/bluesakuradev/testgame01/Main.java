@@ -27,6 +27,7 @@ public class Main extends SimpleApplication {
     MazeState maze = new MazeState("maze");
 
     IslandState island = new IslandState("island");
+    CaveState cave = new CaveState("island");
 
     BaseAppState[] states = {ats, fcts, sts, mlts, maze};
 
@@ -126,6 +127,10 @@ public class Main extends SimpleApplication {
     public void startIsland(){
         logger.info("Loading Island Test");
         stateManager.attach(island);
+    }
+    public void startCave(){
+        logger.info("Loading Cave Test");
+        stateManager.attach(cave);
     }
 
     public static void disableFlyCamMovement(InputManager im){

@@ -34,6 +34,9 @@
                         <control name="button" label="Island Test" id="IslandTestBtn" align="center" valign="center" visibleToMouse="true" margin="20px">
                             <interact onClick="startIsland()"/>
                         </control>
+                        <control name="button" label="Cave Test" id="CaveTestBtn" align="center" valign="center" visibleToMouse="true" margin="20px">
+                            <interact onClick="startCave()"/>
+                        </control>
                     </panel>
                     <control name="button" label="Quit" id="quitBtn" align="center" valign="center" visibleToMouse="true" margin="20px">
                         <interact onClick="quitBtnClick()"/>
