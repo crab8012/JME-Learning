@@ -36,6 +36,7 @@ My next few commits should encompass multiple things...
 21) There should be a cave AppState that the player can walk around in [DONE]
 22) It should have ambient lighting from a campfire in the middle [MAYBE]
 23) There should be smoke particle effects coming off the fire [DONE]
+23.5) See end of file - Map Editor/Data Storage. Will greatly improve project and future projects.
 24) There should be positional audio with fire noise
 25) There should be positional audio of rain from the mouth of the cave
 26) The audio scene/fx should change as the player leaves the cave
@@ -118,3 +119,17 @@ My next few commits should encompass multiple things...
 89) The story-mode game should have a similar, yet different story mode for co-op.
 89) This could be either a concurrent story, a prequel, or a sequel story
 90) The co-op mode should last at least 4 hours of gameplay
+
+## Map / Level Editor
+# and associated storage format and resource manager
+1) Create new sub-project or package for level editor [DONE]
+2) Create accessible UI with buttons. Should be pulled up and dismissed with a keystroke or button click [DONE]
+3) Create resource manager main class
+4) Create 3d model and resource manager
+5) Create object classes for in-game items
+6) Create entity classes for NPCs
+7) Create GameLevel objects that save and load all level data
+8) Create UI for spawning in objects
+9) Create UI representation of objects and entities in the world... A world tree
+10) Create draggable behaviours to help position items in game space
+11) Create UI for changing object and entity properties
