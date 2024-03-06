@@ -129,7 +129,7 @@ My next few commits should encompass multiple things...
 5) Create object classes for in-game items
 6) Create entity classes for NPCs
 7) Create GameLevel objects that save and load all level data
-8) Create UI for spawning in objects
+8) Create UI for spawning in objects [DONE]
 9) Create UI representation of objects and entities in the world... A world tree
 10) Create draggable behaviours to help position items in game space
 11) Create UI for changing object and entity properties
